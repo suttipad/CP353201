@@ -13,21 +13,21 @@ class NormalBoundary {
 
 	@ParameterizedTest
 	@CsvSource({
-	"0,		4, 500, Standard",
-	"1,		4, 500, Standard",
-	"50000,	4, 500, Gold",
-	"99999,	4, 500, Gold",
-	"100000,4, 500, Standard",
+	"0,		15, 500, Standard",
+	"1,		15, 500, Standard",
+	"50000,	15, 500, Standard",
+	"99999,	15, 500, Standard",
+	"100000,15, 500, Standard",
 	
-	"50000, 0, 500, Standard",
-	"50000, 1, 500, Standard",
-	"50000, 6, 500, Standard",
-	"50000, 7, 500, Standard",
+	"50000, 0, 	500, Standard",
+	"50000, 1, 	500, Standard",
+	"50000, 29, 500, Standard",
+	"50000, 30, 500, Standard",
 	
-	"50000, 4, 0, Standard",
-	"50000, 4, 1, Standard",
-	"50000, 4, 999, Gold",
-	"50000, 4, 1000, Standard",
+	"50000, 15, 0, Standard",
+	"50000, 15, 1, Standard",
+	"50000, 15, 999, Standard",
+	"50000, 15, 1000, Standard",
 	
 	//Special Silver test
 	"10000, 1, 100, Silver",
