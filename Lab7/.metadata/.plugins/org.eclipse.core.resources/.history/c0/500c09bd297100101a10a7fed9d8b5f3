@@ -1,0 +1,51 @@
+package sqa.test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+import sqa.main.CountWordClumps;
+
+public class BranchCoverageTest {
+
+    @Test
+    public void testNullArray() {
+        // Branch: A → true
+        assertEquals(0, CountWordClumps.countClumps(null));
+    }
+
+    @Test
+    public void testEmptyArray() {
+        // Branch: A → false, then A (nums.length == 0) → true
+        assertEquals(0, CountWordClumps.countClumps(new int[] {}));
+    }
+
+    @Test
+    public void testNoLoopExecution() {
+        // Branch: A → false, A → false, F → false
+        assertEquals(0, CountWordClumps.countClumps(new int[] {7}));
+    }
+
+    @Test
+    public void testEnterLoop_NoClump() {
+        // G → false, J → true (normal traversal)
+        assertEquals(0, CountWordClumps.countClumps(new int[] {1, 2}));
+    }
+
+    @Test
+    public void testEnterLoop_Clump() {
+        // G → true, J → false
+        assertEquals(1, CountWordClumps.countClumps(new int[] {2, 2}));
+    }
+
+    @Test
+    public void testBothBranchesRepeated() {
+        // G → true, J → true after
+        assertEquals(2, CountWordClumps.countClumps(new int[] {1, 1, 2, 2}));
+    }
+    
+    @Test
+    public void testConstructorCall() {
+        // Covers class declaration line
+        new CountWordClumps();
+    }
+}

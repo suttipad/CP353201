@@ -1,0 +1,63 @@
+package sqa.test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+import sqa.main.CountWordClumps;
+
+public class LineCoverageTest {
+
+    @Test
+    public void testNullArray() {
+        // Covers null input
+        assertEquals(0, CountWordClumps.countClumps(null));
+    }
+
+    @Test
+    public void testEmptyArray() {
+        // Covers empty input
+        assertEquals(0, CountWordClumps.countClumps(new int[] {}));
+    }
+
+    @Test
+    public void testNoClumps() {
+        // Covers a normal array with no repeated values
+        assertEquals(0, CountWordClumps.countClumps(new int[] {1, 2, 3}));
+    }
+
+    @Test
+    public void testOneClump() {
+        // One clump of two identical numbers
+        assertEquals(1, CountWordClumps.countClumps(new int[] {1, 2, 2, 3}));
+    }
+
+    @Test
+    public void testMultipleClumps() {
+        // Multiple distinct clumps
+        assertEquals(2, CountWordClumps.countClumps(new int[] {1, 1, 2, 2, 3}));
+    }
+
+    @Test
+    public void testLongSingleClump() {
+        // One long clump only counted once
+        assertEquals(1, CountWordClumps.countClumps(new int[] {5, 5, 5, 5}));
+    }
+
+    @Test
+    public void testAlternatingValues() {
+        // Alternating values should not form clumps
+        assertEquals(0, CountWordClumps.countClumps(new int[] {1, 2, 1, 2, 1}));
+    }
+
+    @Test
+    public void testResetInClump() {
+        // Covers clump reset logic
+        assertEquals(2, CountWordClumps.countClumps(new int[] {1, 1, 2, 3, 3}));
+    }
+
+    @Test
+    public void testConstructorCall() {
+        // Covers class declaration line
+        new CountWordClumps();
+    }
+}

@@ -1,0 +1,58 @@
+package sqa.test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+import sqa.main.CountWordClumps;
+
+public class C_DC_CoverageTest {
+
+    @Test
+    public void testNullInput() {
+        assertEquals(0, CountWordClumps.countClumps(null)); // A = T
+    }
+
+    @Test
+    public void testEmptyInput() {
+        assertEquals(0, CountWordClumps.countClumps(new int[] {})); // B = T
+    }
+
+    @Test
+    public void testOneElement() {
+        assertEquals(0, CountWordClumps.countClumps(new int[] {1})); // A = F, B = F
+    }
+
+    @Test
+    public void testSingleClump() {
+        assertEquals(1, CountWordClumps.countClumps(new int[] {1, 1, 1}));
+    }
+
+    @Test
+    public void testTwoClumps() {
+        assertEquals(2, CountWordClumps.countClumps(new int[] {1, 1, 2, 2}));
+    }
+
+    @Test
+    public void testAlternatingValues() {
+        assertEquals(0, CountWordClumps.countClumps(new int[] {1, 2, 1, 2}));
+    }
+
+    @Test
+    public void testAllSame() {
+        assertEquals(1, CountWordClumps.countClumps(new int[] {5, 5, 5, 5}));
+    }
+
+    @Test
+    public void testAdjacentClumps() {
+        assertEquals(2, CountWordClumps.countClumps(new int[] {3, 3, 4, 4}));
+    }
+
+    @Test
+    public void testSingleClumpOnlyOnce() {
+        assertEquals(1, CountWordClumps.countClumps(new int[] {1, 2, 2, 3}));
+    }
+
+    @Test
+    public void testConstructorLine() {
+        new CountWordClumps(); // Line coverage only
+    }
+}

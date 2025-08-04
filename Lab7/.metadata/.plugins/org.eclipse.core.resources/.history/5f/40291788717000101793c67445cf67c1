@@ -1,0 +1,81 @@
+package sqa.test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+import sqa.main.CountWordClumps;
+
+public class LineCoverageTest {
+
+    @Test
+    public void testNullArray() {
+        // Covers line 3 (A = true) and line 4
+        assertEquals(0, CountWordClumps.countClumps(null));
+    }
+
+    @Test
+    public void testEmptyArray() {
+        // Covers line 3 (A = false), B = true, and line 4
+        assertEquals(0, CountWordClumps.countClumps(new int[] {}));
+    }
+
+    @Test
+    public void testNoClumps() {
+        // Covers loop, all if conditions false (G, H, K)
+        // Covers line: 3, 6, 7, 8, 10, 11 (false), 15 (true), 16, 17, 19
+        assertEquals(0, CountWordClumps.countClumps(new int[] {1, 2, 3}));
+    }
+
+    @Test
+    public void testOneClump() {
+        // Covers true branch of G and H, and false of K
+        // Covers line: 3, 6, 7, 8, 10, 11 (true), 12, 13, 15 (false), 10, 11 (false), 15 (true), 16, 17, 19
+        assertEquals(1, CountWordClumps.countClumps(new int[] {1, 2, 2, 3}));
+    }
+
+    @Test
+    public void testMultipleClumps() {
+        // Covers multiple entries into both G/H and K
+        assertEquals(2, CountWordClumps.countClumps(new int[] {1, 1, 1, 2, 2, 1}));
+    }
+
+    @Test
+    public void testAdjacentDifferentClumps() {
+        // Tests transition from one clump to another
+        assertEquals(2, CountWordClumps.countClumps(new int[] {3, 3, 4, 4}));
+    }
+
+    @Test
+    public void testAllSameValues() {
+        // Should count only 1 clump
+        assertEquals(1, CountWordClumps.countClumps(new int[] {5, 5, 5, 5, 5}));
+    }
+
+    @Test
+    public void testAlternatingValues() {
+        // No clumps, since values alternate
+        assertEquals(0, CountWordClumps.countClumps(new int[] {1, 2, 1, 2, 1}));
+    }
+
+    @Test
+    public void testSingleElementArray() {
+        // No clumps possible with single element
+        assertEquals(0, CountWordClumps.countClumps(new int[] {7}));
+    }
+    
+    @Test
+    public void testLongClumpOnceCounted() {
+        assertEquals(1, CountWordClumps.countClumps(new int[] {5, 5, 5, 5}));
+    }
+
+    @Test
+    public void testChangingPrevMultipleTimes() {
+        assertEquals(2, CountWordClumps.countClumps(new int[] {1, 1, 2, 2, 3}));
+    }
+
+    @Test
+    public void testNoDuplicateValues() {
+        assertEquals(0, CountWordClumps.countClumps(new int[] {10, 20, 30, 40}));
+    }
+
+}

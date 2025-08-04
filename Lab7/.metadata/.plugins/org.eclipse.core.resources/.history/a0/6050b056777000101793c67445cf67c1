@@ -1,0 +1,42 @@
+package sqa.test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+import sqa.main.CountWordClumps;
+
+public class ConditionCoverageTest {
+
+    @Test // TC1: A = true
+    public void testNullArray() {
+        assertEquals(0, CountWordClumps.countClumps(null));
+    }
+
+    @Test // TC2: A = false, B = true
+    public void testEmptyArray() {
+        assertEquals(0, CountWordClumps.countClumps(new int[] {}));
+    }
+
+    @Test // TC3: C = false, D = false
+    public void testDifferentValuesAlreadyInClump() {
+        int[] arr = {1, 1, 2};
+        CountWordClumps.countClumps(arr); // clump from 1s, then 2 != 1 but already not in clump
+    }
+
+    @Test // TC4: C = true, D = false
+    public void testContinueClumpIgnored() {
+        int[] arr = {5, 5, 5};  // Only one clump should be counted
+        assertEquals(1, CountWordClumps.countClumps(arr));
+    }
+
+    @Test // TC5: C = false, D = true
+    public void testResetPrevThenDifferent() {
+        int[] arr = {1, 2, 3};  // All values different
+        assertEquals(0, CountWordClumps.countClumps(arr));
+    }
+
+    @Test // TC6: C = true, D = true
+    public void testStartNewClump() {
+        int[] arr = {3, 3};  // New clump starts
+        assertEquals(1, CountWordClumps.countClumps(arr));
+    }
+}

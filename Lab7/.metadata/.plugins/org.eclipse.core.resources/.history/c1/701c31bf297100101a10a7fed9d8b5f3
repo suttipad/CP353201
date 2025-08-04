@@ -1,0 +1,33 @@
+package sqa.test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+import sqa.main.CountWordClumps;
+
+public class BlockCoverageTest {
+
+    @Test
+    public void testNullArray() {
+        // Covers Block A
+        assertEquals(0, CountWordClumps.countClumps(null));
+    }
+
+    @Test
+    public void testNoClumps() {
+        // Covers Block B, C, E, F
+        assertEquals(0, CountWordClumps.countClumps(new int[] {1, 2, 3}));
+    }
+
+    @Test
+    public void testWithClump() {
+        // Covers Block D
+        assertEquals(1, CountWordClumps.countClumps(new int[] {1, 2, 2, 3}));
+    }
+    
+    @Test
+    public void testConstructorCall() {
+        // Covers class declaration line
+        new CountWordClumps();
+    }
+}
